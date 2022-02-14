@@ -1,9 +1,7 @@
 
 // Declaración de variables.
-var Fotos; // Lugar donde se almacenara la ruta de la imagen.
 var V_max; // Longitud máxima del vector "Fotos".
 var n; // Indice para la logica del reproductor.
-
 n = 0; // Inicia la variable el indice con valor 0.
 
 
@@ -59,15 +57,21 @@ function visualizador(vector, id){                 /* reroductor */
     let galeria = document.querySelector(idElegido);
     window.addEventListener('click',e=>{
     V_max = vector.length;
+    //var contador=galeria.querySelector('#contador');
     var atras=galeria.querySelector('#botonI');
     var adelante=galeria.querySelector('#botonD');
     var imagenes = galeria.querySelector('.Diapositiva');
     var video = galeria.querySelector('.video');
     var trgt= e.target;
     console.log("click en "+trgt);
+     var contEle = galeria.querySelector('#contador');
     if(trgt == atras){
         if(n>0){
+            var cont = String.raw`${n}/${V_max}`;
+            contEle.textContent = cont;
+
             if(esVideo(vector[n-1])==false){
+                            
                 imagenes.style.zIndex = 9;
 
                 video.style.zIndex = 7;
@@ -75,6 +79,7 @@ function visualizador(vector, id){                 /* reroductor */
                 imagenes.src = vector[n-1];
 
                   } else {
+                   
                     video.style.zIndex = 9;
 
                     imagenes.style.zIndex = 7;
@@ -83,9 +88,11 @@ function visualizador(vector, id){                 /* reroductor */
 
                   }
 
-          console.log("es video "+esVideo(vector[n-1]))
+          
           n--;
-        } else {
+        } else {             
+                var cont = String.raw`${V_max}/${V_max}`;
+                contEle.textContent = cont;
 
                 if(esVideo(vector[V_max-1])==false){
                 imagenes.style.zIndex = 9;
@@ -95,7 +102,10 @@ function visualizador(vector, id){                 /* reroductor */
                  console.log("es video "+esVideo(vector[V_max-1]))
                  n = V_max-1;
 
+                
                   } else {
+                    
+
                     video.style.zIndex = 9;
 
                     imagenes.style.zIndex = 7;
@@ -103,6 +113,8 @@ function visualizador(vector, id){                 /* reroductor */
                     video.src = vector[V_max-1];
                          console.log("es video "+esVideo(vector[V_max-1]))
                      n = V_max-1;
+
+                    
                   }
 
 
@@ -111,6 +123,10 @@ function visualizador(vector, id){                 /* reroductor */
     } else if(trgt==adelante){
       if(n<V_max-1){
         var verificador = esVideo(vector[n]);
+
+        var cont = String.raw`${n+1}/${V_max}`;
+        contEle.textContent = cont;
+
             if(verificador==false){
                 imagenes.style.zIndex = 9;
 
@@ -132,6 +148,9 @@ function visualizador(vector, id){                 /* reroductor */
                   }
         
       } else {
+        var cont = String.raw`${n+1}/${V_max}`;
+        contEle.textContent = cont;
+
         var verificador = esVideo(vector[V_max-1]);
         console.log("es video  "+verificador)
             if(verificador){
